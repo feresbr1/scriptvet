@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scriptvet: which install scripts do your dependencies really need?</title>
+    <meta
+      name="description"
+      content="npm 12, pnpm 11, Bun and Yarn block dependency install scripts by default. Drop a lockfile to see what each postinstall script does, whether to allow it, and get the allowScripts / allowBuilds / trustedDependencies config."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta property="og:title" content="scriptvet: which install scripts do you actually need?" />
+    <meta
+      property="og:description"
+      content="See what every dependency's install script does and generate the allowlist npm 12, pnpm 11, Yarn and Bun need."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://feresbr1.github.io/scriptvet/" />
+    <meta property="og:image" content="https://feresbr1.github.io/scriptvet/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>Run <code>npx github:feresbr1/scriptvet</code> in your project.</noscript>
+    <script type="module" src="/src/web/main.tsx"></script>
+  </body>
+</html>

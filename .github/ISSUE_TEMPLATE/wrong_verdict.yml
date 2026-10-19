@@ -1,0 +1,25 @@
+name: Wrong verdict
+description: scriptvet recommends allowing a script that should be denied, or the reverse.
+labels: [verdict]
+body:
+  - type: input
+    id: package
+    attributes:
+      label: Package and version
+      placeholder: esbuild@0.28.2
+    validations:
+      required: true
+  - type: dropdown
+    id: got
+    attributes:
+      label: scriptvet said
+      options: [Allow, Deny, Review]
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What the script actually does
+      description: What breaks if it is denied, or why it should not be allowed. Links to the code help.
+    validations:
+      required: true

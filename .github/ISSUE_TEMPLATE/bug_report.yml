@@ -1,0 +1,28 @@
+name: Bug report
+description: A crash, a lockfile that is not parsed, or a config file written incorrectly.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options: [Website, CLI]
+    validations:
+      required: true
+  - type: input
+    id: manager
+    attributes:
+      label: Package manager and version
+      placeholder: pnpm 11.28.6
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: A minimal lockfile or the command you ran. Remove private package names.
+      render: text

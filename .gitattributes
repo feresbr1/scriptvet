@@ -1,0 +1,3 @@
+* text=auto eol=lf
+dist/cli/** linguist-generated=true
+test/fixtures/** linguist-vendored=true
