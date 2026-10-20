@@ -1,6 +1,6 @@
 {
   "name": "scriptvet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "See what every dependency's install script actually does, then generate the allowlist npm 12, pnpm 11, Yarn and Bun need. In your browser or terminal.",
   "type": "module",
   "license": "MIT",

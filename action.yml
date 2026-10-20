@@ -1,0 +1,49 @@
+name: scriptvet
+description: Fail pull requests that add dependencies with unreviewed install scripts, and explain what each script does.
+author: feresbr1
+branding:
+  icon: shield
+  color: purple
+inputs:
+  path:
+    description: Lockfile to check. Defaults to the first lockfile found in working-directory.
+    required: false
+    default: ''
+  working-directory:
+    description: Directory containing the lockfile and package.json.
+    required: false
+    default: '.'
+  manager:
+    description: "Config to check against: npm, pnpm, yarn or bun. Defaults to the lockfile's package manager."
+    required: false
+    default: ''
+  fail-on-uncovered:
+    description: Fail when a package with install scripts is not in your allowlist (allowScripts, allowBuilds, dependenciesMeta or trustedDependencies).
+    required: false
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    - name: Check install scripts
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        SCRIPTVET_PATH: ${{ inputs.path }}
+        SCRIPTVET_MANAGER: ${{ inputs.manager }}
+        SCRIPTVET_FAIL: ${{ inputs.fail-on-uncovered }}
+      run: |
+        set -o pipefail
+        args=(--markdown --no-color)
+        if [ -n "$SCRIPTVET_PATH" ]; then args=("$SCRIPTVET_PATH" "${args[@]}"); fi
+        if [ -n "$SCRIPTVET_MANAGER" ]; then args+=(--manager "$SCRIPTVET_MANAGER"); fi
+        if [ "$SCRIPTVET_FAIL" = "true" ]; then args+=(--check); fi
+        status=0
+        node "$GITHUB_ACTION_PATH/dist/cli/scriptvet.mjs" "${args[@]}" | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
+        if [ "$status" = "1" ]; then
+          echo "::error title=scriptvet::Dependencies with install scripts are missing from your allowlist. Run 'npx github:feresbr1/scriptvet --write' locally to add the recommended decisions, review them, and commit."
+          {
+            echo ""
+            echo "> Run \`npx github:feresbr1/scriptvet --write\` locally to add the recommended decisions to your config, review them, and commit."
+          } >> "$GITHUB_STEP_SUMMARY"
+        fi
+        exit "$status"

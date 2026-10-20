@@ -101,7 +101,35 @@ scriptvet [lockfile] [options]
 
 Exit codes: `0` done, `1` `--check` found uncovered scripts, `2` usage error, unreadable lockfile, or a registry lookup failed.
 
-### In CI
+### In CI (GitHub Action)
+
+```yaml
+name: Install scripts
+on: [pull_request]
+jobs:
+  scriptvet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: feresbr1/scriptvet@v1
+```
+
+The job fails when a dependency with a `preinstall`, `install` or `postinstall` script is not in your
+allowlist. The job summary lists every such package with what its script does and the recommended
+decision. To fix it, run `npx github:feresbr1/scriptvet --write` locally, review the change and
+commit it.
+
+| Input               | Default              |                                                        |
+| ------------------- | -------------------- | ------------------------------------------------------ |
+| `path`              | first lockfile found | Lockfile to check                                      |
+| `working-directory` | `.`                  | Folder with the lockfile and package.json              |
+| `manager`           | the lockfile's       | `npm`, `pnpm`, `yarn` or `bun` config to check against |
+| `fail-on-uncovered` | `true`               | Set to `false` to only report                          |
+
+Any other CI system can run the CLI directly:
 
 ```yaml
 - run: npx github:feresbr1/scriptvet --check

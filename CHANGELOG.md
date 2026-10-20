@@ -2,6 +2,13 @@
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-10-20
+
+### Added
+
+- GitHub Action: `uses: feresbr1/scriptvet@v1` fails pull requests that add dependencies with
+  unreviewed install scripts and writes the report to the job summary.
+
 ## [1.0.0] - 2026-10-19
 
 ### Added
@@ -14,4 +21,5 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - `--check` for CI, JSON and Markdown output.
 - Website with per-package Allow/Deny toggles and live config.
 
+[1.0.1]: https://github.com/feresbr1/scriptvet/releases/tag/v1.0.1
 [1.0.0]: https://github.com/feresbr1/scriptvet/releases/tag/v1.0.0

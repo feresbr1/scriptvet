@@ -7724,7 +7724,7 @@ async function mapLimit(items, limit, task) {
 }
 
 // src/core/version.ts
-var VERSION = "1.0.0";
+var VERSION = "1.0.1";
 
 // src/core/analyze.ts
 var HOOKS = ["preinstall", "install", "postinstall"];
